@@ -1,0 +1,3 @@
+-En rovdyr klasse der lever af plante eder klassen
+-En metode for rovdyr så de ikke jager heletiden
+-En metode for dyrene til at se deres omgivelser
