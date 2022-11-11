@@ -23,8 +23,10 @@ abstract class Animal {
   }
   
   void wander(){}
-  void seek(){}
+  void flee(){}
+  void hunt(Animal _target){}
   void move(){}
+  void move(Animal _target){}
   
   void display(int _r, int _g, int _b){
     float theta = vel.heading() + PI/2;
