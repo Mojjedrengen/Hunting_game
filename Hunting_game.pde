@@ -3,7 +3,7 @@ Animal hunter;
 
 float close[] = new float[5];
 int targetObj;
-float oldD = width + 1000;
+float oldD = width * height;
 float newD;
 
 void setup() {
