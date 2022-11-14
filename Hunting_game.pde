@@ -1,7 +1,7 @@
 Animal prey[] = new Animal[5];
 Animal hunter;
 
-float close[] = new float[5];
+float close[] = new float[5]; //varibals for hunter to chose target
 int targetObj;
 float oldD = width * height;
 float newD;
@@ -22,7 +22,7 @@ void draw() {
     prey[i].update();
     prey[i].display(0, 0, 0);
 
-    close[i] = dist(hunter.pos.x, hunter.pos.y, prey[i].pos.x, prey[i].pos.y);
+    close[i] = dist(hunter.pos.x, hunter.pos.y, prey[i].pos.x, prey[i].pos.y); //hunter choses closes target
     newD = close[i];
     if (oldD>newD) {
       oldD = newD;
@@ -35,7 +35,7 @@ void draw() {
   hunter.display(255, 0, 0);
 
 
-  fill(0);
+  fill(0);    //debug
   textSize(128);
   textAlign(CENTER);
   text(millis()/500, width/2, height/2);

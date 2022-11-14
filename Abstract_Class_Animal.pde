@@ -11,14 +11,14 @@ abstract class Animal {
   int counter;
   int timer;
   
-  void update() {
+  void update() { //moves the animal
     vel.add(accel);
     vel.limit(maxspeed);
     pos.add(vel);
     accel.mult(0);
   }
   
-  void applyForce(PVector _force) {
+  void applyForce(PVector _force) { //apply force to the animal
     accel.add(_force);
   }
   
@@ -28,7 +28,7 @@ abstract class Animal {
   void move(){}
   void move(Animal _target){}
   
-  void display(int _r, int _g, int _b){
+  void display(int _r, int _g, int _b){    //draws the animal
     float theta = vel.heading() + PI/2;
     fill(_r, _g, _b);
     stroke(0);
