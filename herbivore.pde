@@ -55,4 +55,11 @@ class Herbivore extends Animal {
     desired.normalize();
     desired.mult(maxspeed);
   }
+  boolean isEaten(Animal _target) { //determins if ther herbivore is eaten or not
+    if (dist(_target.pos.x, _target.pos.y, pos.x, pos.y) <= 5) {
+       return true;
+    } else {
+      return false;
+    }
+  }
 }

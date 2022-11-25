@@ -31,6 +31,7 @@ abstract class Animal {
   void hunt(Animal _target) {}
   void move(Animal _target) {}
   void debug(){}
+  boolean isEaten(Animal _target){ return false; }
 
   void display(int _r, int _g, int _b) {    //draws the animal
     float theta = vel.heading() + PI/2;
