@@ -4,10 +4,12 @@ ArrayList<Animal> newPrey = new ArrayList<Animal>(); // it is the new prey
 ArrayList<Food> apples = new ArrayList<Food>(); // apple does not currently work
 
 //ArrayList<float> close = new ArrayList<float>();
-float close[] = new float[15]; //varibals for hunter to chose target. Needs to be the same as how many prey there are
+float close[] = new float[20]; //varibals for hunter to chose target. Needs to be the same as how many prey there are
 int targetObj;
 float oldD = width * height;
 float newD;
+int Atimer = millis(); //timer to spawn apples
+int Acounter = 1000;   //counter to spawn apples
 
 void setup() {
   fullScreen();
@@ -21,6 +23,7 @@ void setup() {
   }
   hunter = new Carnivore(new PVector(random(width), random(height)), 3, 0.9, 200);
   //PVector _pos, float _maxspeed, float _maxforce, float _range
+  apples.add(new Apple(new PVector(random(width), random(height))));
 }
 
 void draw() {
@@ -37,6 +40,29 @@ void draw() {
   //    targetObj = i;
   //  }
   //}
+  
+  for (int i = apples.size()-1; i >= 0; i--) { // apple does not currently work
+    Food apple = apples.get(i);
+
+    //if (apple.spawn()) {
+    //  apples.add(new Apple(new PVector(random(width), random(height))));
+    //}
+    apple.display();
+
+    //for (int j = 0; j < newPrey.size(); j++) { //apple.eaten crashes the game rn
+    //  Animal nextPrey = newPrey.get(j);
+    //  if (apple.eaten(nextPrey)) {
+    //    apples.remove(j);
+    //    print(" Eaten "+j);
+    //  }
+    //}
+  }
+  if (millis() - Atimer > Acounter) { //spawns apples every second
+    apples.add(new Apple(new PVector(random(width), random(height))));
+    Atimer = millis();
+    print("new apple");
+  }
+  
   for (int i = newPrey.size()-1; i >= 0; i--) { //runs the prey
     Animal nextPrey = newPrey.get(i);
     nextPrey.move(hunter);
@@ -45,29 +71,16 @@ void draw() {
     if (nextPrey.isEaten(hunter)) { //delets the prey if it's eaten
       newPrey.remove(i);
       close = shorten(close);
+      print(" "+i+" was eaten");
     }
+    
+    preyDebug(i, nextPrey); // can only show 14 diffrent prey
 
     close[i] = dist(hunter.pos.x, hunter.pos.y, nextPrey.pos.x, nextPrey.pos.y); // chooses the target the hunter goes after
     newD = close[i];
     if (oldD > newD) { 
       oldD = newD;
       targetObj = i;
-    }
-  }
-  for (int i = apples.size()-1; i >= 0; i--) { // apple does not currently work
-    Food apple = apples.get(i);
-    
-    if (apple.spawn()) {
-      apples.add(new Apple(new PVector(random(width), random(height))));
-      
-    }
-    apple.display();
-    
-    for (int j = newPrey.size()-1; j >= 0; j--) {
-      Animal nextPrey = newPrey.get(j);
-      if (apple.eaten(nextPrey)) {
-        apples.remove(j);
-      }
     }
   }
 
@@ -77,21 +90,5 @@ void draw() {
   hunter.update();
   hunter.display(255, 0, 0);
 
-  hunter.debug();
-
-  fill(0);  //shows how many prey there are
-  textSize(25);
-  textAlign(CENTER);
-  text("prey = "+newPrey.size(), width/2, 100);
-
-  text("targeting: "+targetObj, width/2, 150); //shows who the hunter is targeting
-
-  textSize(128);  //debug
-  text(millis()/500, width/2, height/2);
-
-  for (int i = 0; i < close.length; i++ ) { // shows how close the prey is to the hunter 
-    textSize(25);
-    textAlign(LEFT);
-    text("close["+i+"] = "+int(close[i]), 30, 50*i+50);
-  }
+  debug();
 }

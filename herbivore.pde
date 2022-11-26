@@ -11,6 +11,7 @@ class Herbivore extends Animal {
     counter = 500;  //How often wander acours in milliseconds
     timer = millis();
     range = _range;
+    hunger = 80;
   }
   void move(Animal _target) {
     if (pos.x < 25) {
