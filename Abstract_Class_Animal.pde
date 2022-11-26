@@ -6,6 +6,7 @@ abstract class Animal {
   float maxforce;
   float oldMaxSpeed;
   float maxspeed;
+  int hunger;
 
   float size;
 
