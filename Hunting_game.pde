@@ -1,9 +1,9 @@
 Animal prey[] = new Animal[5]; //don't use anymore
 Animal hunter;
+int startPrey = 20;
 ArrayList<Animal> newPrey = new ArrayList<Animal>(); // it is the new prey
 ArrayList<Food> apples = new ArrayList<Food>(); // apple does not currently work
-
-//ArrayList<float> close = new ArrayList<float>();
+ArrayList<Float> closes = new ArrayList<Float>(startPrey);
 float close[] = new float[20]; //varibals for hunter to chose target. Needs to be the same as how many prey there are
 int targetObj;
 float oldD = width * height;
@@ -18,7 +18,7 @@ void setup() {
     prey[i] = new Herbivore(new PVector(random(width), random(height)), 3, 0.1, 100);
     //PVector _pos, float _maxspeed, float _maxforce, float _range
   }
-  for (int i = 0; i < close.length; i++) {
+  for (int i = 0; i < startPrey; i++) {
     newPrey.add(new Herbivore(new PVector(random(width), random(height)), 3, 0.1, 100));
   }
   hunter = new Carnivore(new PVector(random(width), random(height)), 3, 0.9, 200);
@@ -77,6 +77,7 @@ void draw() {
     preyDebug(i, nextPrey); // can only show 14 diffrent prey
 
     close[i] = dist(hunter.pos.x, hunter.pos.y, nextPrey.pos.x, nextPrey.pos.y); // chooses the target the hunter goes after
+    //closes.get(i) = dist(hunter.pos.x, hunter.pos.y, nextPrey.pos.x, nextPrey.pos.y);
     newD = close[i];
     if (oldD > newD) { 
       oldD = newD;
