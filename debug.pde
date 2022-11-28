@@ -11,10 +11,10 @@ void debug() {
   textSize(128);  //debug
   text(millis()/500, width/2, height/2);
 
-  for (int i = 0; i < close.length; i++ ) { // shows how close the prey is to the hunter 
+  for (int i = 0; i < closes.size(); i++ ) { // shows how close the prey is to the hunter 
     textSize(25);
     textAlign(LEFT);
-    text("close["+i+"] = "+int(close[i]), 30, 50*i+50);
+    text("close["+i+"] = "+int(closes.get(i)), 30, 50*i+50);
   }
 }
 
