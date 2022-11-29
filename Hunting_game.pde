@@ -7,9 +7,11 @@ int targetObj;
 float oldD = width * height;
 float newD;
 int Atimer = millis(); //timer to spawn apples
-int Acounter = 1000;   //counter to spawn apples
+int Acounter = 5000;   //counter to spawn apples
 boolean wasEaten = false; //tells if a prey was eaten
 int whoEaten; //tels which one was eaten
+int awhoEaten;
+boolean awasEaten = false;
 
 void setup() {
   fullScreen();
@@ -25,21 +27,18 @@ void setup() {
 
 void draw() {
   background(151); 
-  for (int i = apples.size()-1; i >= 0; i--) { // apple does not currently work
+  for (int i = apples.size()-1; i >= 0; i--) { // loop to run apples
     Food apple = apples.get(i);
-
-    //if (apple.spawn()) {
-    //  apples.add(new Apple(new PVector(random(width), random(height))));
-    //}
     apple.display();
 
-    //for (int j = 0; j < newPrey.size(); j++) { //apple.eaten crashes the game rn
-    //  Animal nextPrey = newPrey.get(j);
-    //  if (apple.eaten(nextPrey)) {
-    //    apples.remove(j);
-    //    print(" Eaten "+j);
-    //  }
-    //}
+    for (int j = 0; j < newPrey.size(); j++) {
+      Animal nextPrey = newPrey.get(j);
+      if (apple.eaten(nextPrey)) {
+        awasEaten = true;
+        awhoEaten = i;
+        print(" Eaten "+j);
+      }
+    }
   }
   if (millis() - Atimer > Acounter) { //spawns apples every second
     apples.add(new Apple(new PVector(random(width), random(height))));
@@ -54,6 +53,7 @@ void draw() {
     nextPrey.display(0, 0, 255);
     if (nextPrey.isEaten(hunter)) { //delets the prey if it's eaten
       wasEaten = true;
+      whoEaten = i;
       print(" "+i+" was eaten");
     }
 
@@ -76,9 +76,16 @@ void draw() {
     wasEaten = false;
     int preySize = newPrey.size()-1;
     print(preySize);
-    newPrey.set(whoEaten, newPrey.get(preySize)); // her er problemet
+    newPrey.set(whoEaten, newPrey.get(preySize)); 
     newPrey.remove(preySize);
-    closes.remove(preySize); //Den vil slette alt under den som den slette.
+    closes.remove(preySize); 
+  }
+  if (awasEaten == true) { // eats the apple. 
+    awasEaten = false;
+    int appleSize = apples.size()-1;
+    print(appleSize);
+    apples.set(awhoEaten, apples.get(appleSize)); 
+    apples.remove(appleSize);
   }
 
   debug();
