@@ -74,8 +74,11 @@ void draw() {
   
   if (wasEaten == true) { // eats the prey. 
     wasEaten = false;
-    newPrey.remove(whoEaten);
-    closes.remove(whoEaten); //Den vil slette alt under den som den slette.
+    int preySize = newPrey.size()-1;
+    print(preySize);
+    newPrey.set(whoEaten, newPrey.get(preySize)); // her er problemet
+    newPrey.remove(preySize);
+    closes.remove(preySize); //Den vil slette alt under den som den slette.
   }
 
   debug();

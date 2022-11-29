@@ -31,7 +31,6 @@ class Herbivore extends Animal {
     } else if (millis() - timer > counter) {   //starts the animals wandering behavior 
       wander();
       timer = millis();
-      print(" H:"+timer/500);  //debug
     }
 
     if (dist(pos.x, pos.y, _target.pos.x, _target.pos.y) > _target.range*2) { // makes so the prey stop running fast when the hunter is not there

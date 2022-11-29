@@ -44,7 +44,6 @@ class Carnivore extends Animal {
       maxspeed = oldMaxSpeed;
       wander();
       timer = millis();
-      print(" C:"+timer/1000);    //debug
       whatbehavior = "wandering";  //debug
     }
 
