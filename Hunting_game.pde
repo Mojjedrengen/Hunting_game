@@ -56,6 +56,11 @@ void draw() {
       whoEaten = i;
       print(" "+i+" was eaten");
     }
+    if (nextPrey.fullHunger()){
+      newPrey.add(new Herbivore(new PVector(random(width), random(height)), 3, 0.1, 100));
+      closes.add(width*height*0.9);
+      print(" sex");
+    }
 
     preyDebug(i, nextPrey); // can only show 14 diffrent prey
 

@@ -31,6 +31,9 @@ class Herbivore extends Animal {
     } else if (millis() - timer > counter) {   //starts the animals wandering behavior 
       wander();
       timer = millis();
+      if (hunger > 0) {
+        hunger--;
+      }
     }
 
     if (dist(pos.x, pos.y, _target.pos.x, _target.pos.y) > _target.range*2) { // makes so the prey stop running fast when the hunter is not there
@@ -58,6 +61,14 @@ class Herbivore extends Animal {
   boolean isEaten(Animal _target) { //determins if ther herbivore is eaten or not
     if (dist(_target.pos.x, _target.pos.y, pos.x, pos.y) <= 5) {
        return true;
+    } else {
+      return false;
+    }
+  }
+  boolean fullHunger() {
+    if (hunger >= 100) {
+      hunger -= 50;
+      return true;
     } else {
       return false;
     }
