@@ -24,5 +24,5 @@ void preyDebug(int _i, Animal _target) { // can only show 14 diffrent prey
   textAlign(RIGHT);
   text("Prey["+_i+"]", width-30, 100*_i+25);
   text("Speed "+int(_target.maxspeed), width-30, 100*_i+50);
-  text("hunger "+_target.hunger, width-30, 100*_i+75);
+  text("hunger "+int(_target.hunger), width-30, 100*_i+75);
 }

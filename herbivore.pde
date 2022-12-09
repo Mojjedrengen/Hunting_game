@@ -32,7 +32,7 @@ class Herbivore extends Animal {
       wander();
       timer = millis();
       if (hunger > 0) {
-        hunger--;
+        hunger -= 0.1;
       }
     }
 
